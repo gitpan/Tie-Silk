@@ -1,0 +1,39 @@
+Add some mechanism for distinguishing between $xll and XLOG_LEVEL such
+that we can have a different prefix for each style, this would allow
+for instance that $xll type log calls could give detailed information
+about where in the program code the log was called and an additional
+step back up the stack stracem to see where the current sub was called
+from (the sub in which the log call is made)
+
+
+Possibly add filtering for log calls with log levels that are below
+the threshold for output at the time of compilation. Say for instance
+that the environment variable LOG_LEVEL is set to 'WARN'. At program
+startup, the internal log level will be set to WARN. Should we at this
+poing filter out any log calls at levels below WARN? Or, should we
+allow for the possibility that withing the program the log_level
+setting could be changed somewhere, thereby allowing, for instance,
+INFO, log calls to achieve output.
+
+
+Add in some mechanism for log rotation. I'm sure there is an
+appropriate log rotatoin package out there.
+
+
+Add in some mechanism for a configuration file, with options like
+logging inside of specific packages under certain circumstances,
+etc...
+
+
+Also, maybe add something so that different log levels may be
+associated with different filehandles. For instance, ERROR could be
+bound to STDERR, while INFO could be bound to STDOUT, etc.
+
+
+It would be great to figure out how to use the FILTER to actually find
+the closing paren on the log call rather than forcing log calls that
+are to be filtered to exist all on one line
+
+
+need to change exported log_level constants to be prefixed with
+LL_<LEVEL> or some such
